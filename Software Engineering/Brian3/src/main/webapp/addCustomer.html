@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Customer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Add a New Customer</h1>
+        <form action="AddCustomer" method="post">
+            <label for="cNum">Customer Number: </label>
+            <input type="text" id="cNum" name="cNum">
+            <br/>
+            <label for="cName">Customer Name: </label>
+            <input type="text" id="cName" name="cName">
+            <br/>
+            <label for="pNum">Phone Number: </label>
+            <input type="text" id="pNum" name="pNum">   
+            <br/>
+            <label for="email">Email: </label>
+            <input type="text" id="email" name="email">
+            <br/>
+            <label for="country">Country: </label>
+            <input type="text" id="country" name="country">
+            <br/>
+            <label for="pCode">Post Code: </label>
+            <input type="text" id="pCode" name="pCode">
+            <br/>
+            <label for="cLimit">Credit Limit: </label>
+            <input type="text" id="cLimit" name="cLimit">
+            <br/>
+            <input type="submit" value="Add Customer">
+        </form>
+    </body>
+    <style>
+        body {
+            background-color: yellowgreen;
+        }
+        h1 {
+          color: Black; 
+          text-align: center;  
+        }
+        form {
+            background-color: lightgray;
+            border: 2px solid black;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: right;
+            width: fit-content;
+        }
+        label {
+            color: black;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            margin-right: 10px
+        }
+    </style>
+</html>

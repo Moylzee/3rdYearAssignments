@@ -1,0 +1,7 @@
+bean\todoBean.class
+com\mycompany\assignment5\resources\JakartaEE10Resource.class
+Entity\TodoFacade.class
+Entity\AbstractFacade.class
+Entity\Todo.class
+com\mycompany\assignment5\JakartaRestConfiguration.class
+todoBeanList.class

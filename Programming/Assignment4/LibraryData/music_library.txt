@@ -1,0 +1,3 @@
+Adele, 21, LibraryData/CoverImages/Adele_21.png,  LibraryData/Albums/Adele_21.txt
+Taylor Swift, 1989, LibraryData/CoverImages/Swift_1989.png,  LibraryData/Albums/Swift_1989.txt
+Macklemore, The Heist,  LibraryData/CoverImages/Macklemore_TheHeist.jpg,  LibraryData/Albums/Macklemore_TheHeist.txt

@@ -1,0 +1,24 @@
+Method movePlayerToCell(x, y, playerId):
+    key = String.format("%d-%c%d", playerId, x, y)
+    check Load Factor
+    if (load factor > threshold):
+        resize hash table;
+    if (player moves to a different cell):
+        entryTime = Current local time
+        if (playerMap does not contain key):
+            create entry for playerMap with key and initialize the time to 0
+            check if other players are in the cell
+            calculate time spent in the cell using getTimeSpent(entryTime) algorithm
+        else:
+            calculate time spent in the cell using getTimeSpent(entryTime) algorithm
+
+Method checkForPlayersInSameCell():
+    for every active player // Player with no exit time
+        parse key at '-' and store xy value;
+        if xy values match:
+            players share the same cell at the same time
+
+Method getTimeSpent(entryTime):
+    Calculate timeSpent by subtracting entryTime from the current local time
+    Return timeSpent as a float representing the time in seconds
+       

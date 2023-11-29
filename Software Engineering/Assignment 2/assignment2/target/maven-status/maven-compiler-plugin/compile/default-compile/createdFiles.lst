@@ -1,0 +1,4 @@
+com\mycompany\assignment2\resources\JakartaEE10Resource.class
+com\mycompany\assignment2\JakartaRestConfiguration.class
+servlets\AddArtist.class
+bean\artist.class

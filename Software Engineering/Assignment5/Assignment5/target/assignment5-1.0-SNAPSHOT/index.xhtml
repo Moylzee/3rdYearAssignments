@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:c="jakarta.tags.core">
+
+<head>
+    <title>Start Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h:form>
+        <!-- Link to create a new to-do item -->
+        <h:link value="Create new todo" outcome="add"/> 
+        <!-- Table for the Data -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Input every item in the to-do list into the table --> 
+                <c:forEach var="todo" items="#{todoBeanList.todoList}">
+                    <tr>
+                        <td>
+                            <h:outputText value="#{todo.id}" />
+                        </td>
+                        <td>
+                            <h:outputText value="#{todo.category}" />
+                        </td>
+                        <td>
+                            <h:outputText value="#{todo.description}" />
+                        </td>
+                        <td>
+                            <h:outputText value="#{todo.priority}" />
+                        </td>
+                        <td>
+                            <!-- Link to edit the specific to-do item clicked --> 
+                            <h:link value="Edit" outcome="edit">
+                                <!-- take the id for reference to know which to-do item to edit -->
+                                <f:param name="todoid" value="#{todo.id}" />
+                            </h:link>  
+                        </td>
+                        <td>
+                            <!-- Link to Delete the specific to-do item clicked --> 
+                            <h:link value="Delete" outcome="delete">
+                                <!-- take the id for reference to know which to-do item to delete -->
+                                <f:param name="todoid" value="#{todo.id}" />
+                            </h:link>    
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </h:form>
+</body>
+    <style>
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .data-table th {
+            font-weight: bold;
+        }
+    </style>
+</html>

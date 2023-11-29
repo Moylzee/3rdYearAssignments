@@ -1,0 +1,6 @@
+bean\Todo.class
+servlet\getToDoList.class
+com\mycompany\mavenproject1\JakartaRestConfiguration.class
+servlet\addTask.class
+com\mycompany\mavenproject1\resources\JakartaEE10Resource.class
+servlet\LoginServlet.class

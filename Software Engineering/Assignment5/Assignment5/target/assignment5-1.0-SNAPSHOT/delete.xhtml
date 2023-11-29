@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+    <head>
+        <title>Edit</title>
+    </head>
+
+    <body>
+        <!-- Form to Delete a to-do entry --> 
+        <h:form>
+            <input type="hidden" name="todoid" value="#{param.todoid}"/>
+            <p:outputLabel for="categoryInput" value="Category" />
+            <br/>
+            <p:inputText id="categoryInput" value="#{todoBean.category}" />
+            <br/>
+            <p:outputLabel for="descriptionInput" value="Description" />
+            <br/>
+            <p:inputText id="descriptionInput" value="#{todoBean.description}" />
+            <p:selectOneRadio id="priorityInput" value="#{todoBean.priority}" layout="grid">
+                <f:selectItem itemLabel="High" itemValue="1" />
+                <f:selectItem itemLabel="Medium" itemValue="2" />
+                <f:selectItem itemLabel="Low" itemValue="3" />
+            </p:selectOneRadio>
+            <p:commandButton value="Confirm Delete" action="#{todoBean.delete}" />
+        </h:form>
+    </body>
+</html>

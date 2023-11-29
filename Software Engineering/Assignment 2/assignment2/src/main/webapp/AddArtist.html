@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Add Artist</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="background-color: lightgray">
+        <h1>Add Artist</h1>
+        <form action="AddArtist" method="post">
+                <label for="fName">First Name</label>
+                <input type="text" id="fName" name="fName">
+            <br/>
+                <label for="sName">Surname</label>
+                <input type="text" id="sName" name="sName">
+            </br>
+            <label for="nationality">Nationality</label>
+                <input type="text" id="nationality" name="nationality">
+            <br/>
+                <label for="bYear">Year of Birth</label>
+                <input type="text" id="bYear" name="bYear">
+            <br/>
+                <label for="dYear">Year of Death</label>
+                <input type="text" id="dYear" name="dYear">
+            <br/>
+                <label for="bio">Biography</label>
+                <textarea id="bio" name="bio" rows="2" cols="19"></textarea>
+            <br/>
+                <label for="pURL">Photo URL</label>
+                <input type="text" id="pURL" name="pURL"> 
+            <br/>
+            <input type="reset" value="Reset">
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+    <style>
+        body {
+            background-color: lightgraygray;
+        }
+        h1 {
+          color: blue; 
+          text-align: center;  
+        }
+        form {
+            background-color: lightblue;
+            border: 2px solid black;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: right;
+            width: fit-content;
+        }
+        label {
+            color: blue;
+        }
+        input[type="reset"],
+        input[type="submit"] {
+            margin-top: 10px;
+            margin-right: 10px
+        }
+    </style>
+    
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin: 35px">
+    <h1 id="title">Choose The Forum You Would Like To Join</h1>
+    <form id="indexForm">
+        <input type="text" placeholder="username" id="usernameInputBox"/>
+        <select id="forumDropdown" name="Forum">
+            <option value="Politics">Politics</option>
+            <option value="Sport">Sport</option>
+            <option value="Nature">Nature</option>
+            <option value="Technology">Technology</option>
+        </select>
+        <input type="button" onclick="joinForum();" value="Join">
+    </form>
+    <div id="forumPage" hidden>
+        <form id="chatForm">
+            <input id="messageField" type="text">
+            <input onclick="sendMsg();" value="send" type="button">
+            <button onclick="mainIndex()" id="homepageButton">Back to HomePage</button>
+        </form>
+        <div id="msg-box" style="width:500px; height: 400px; background: #eee; overflow:auto;" ></div>
+    </div>
+</body>
+
+<script>
+    // Variables
+    var webSocket;
+    var username;
+    var msgField = document.getElementById("messageField");
+    var divMsg = document.getElementById("msg-box");
+    var title = document.getElementById("title");
+    var indexForm = document.getElementById("indexForm");
+    var forumPage;
+    var forumValue;
+
+    function joinForum() {
+        username = document.getElementById("usernameInputBox").value;
+        forumPage = document.getElementById("forumPage");
+        forumValue = document.getElementById("forumDropdown").value;
+
+        hideMainIndex(); // Hide the Main Index
+
+        webSocket = new WebSocket("ws://localhost:8080/Assignment6/server");
+        webSocket.onopen = function () {
+            console.log("connection opened");
+            // Request existing messages when a user joins
+            var requestMessagesMsg = {
+                action: "requestMessages",
+                forum: forumValue
+            };
+            webSocket.send(JSON.stringify(requestMessagesMsg));
+
+            // Join the forum
+            var joinMsg = {
+                action: "join",
+                forum: forumValue
+            };
+            webSocket.send(JSON.stringify(joinMsg));
+        };
+
+        webSocket.onmessage = function (message) {
+            var parsedMessage = JSON.parse(message.data);
+            if (parsedMessage.action === "post" && parsedMessage.username !== username) {
+                // Add Messages to the forum for everyone to see except for the sender who already has it 
+                divMsg.innerHTML += "<div style='color:grey'>" + parsedMessage.username + ": " + parsedMessage.message + "</div>";
+            }else if (parsedMessage.action === "messages") {
+                // Display Existing Messages
+                displayExistingMessages(parsedMessage.messages);
+            }
+        };
+
+        webSocket.onclose = function () {console.log("connection closed");};
+        webSocket.onerror = function wserror(message) {console.log("error: " + message);};
+    }
+
+    function hideMainIndex() {
+        forumPage.hidden = false;
+        indexForm.hidden = true;
+        title.textContent = forumValue;
+    }
+
+    function mainIndex() {
+        divMsg.innerHTML = "";
+        forumPage.hidden = true;
+        indexForm.hidden = false;
+        title.textContent = "Choose The Forum You Would Like To Join";
+        if (webSocket) {
+            webSocket.close();
+        }
+    }
+
+    function sendMsg() {
+        var msgToSend = msgField.value;
+        webSocket.send(msgToSend);
+        // Update the client's view immediately
+        divMsg.innerHTML += "<div style='color:blue'> " + username + ": " + msgToSend + "</div>";
+        // Send the new post to the server
+        var postMsg = {
+            action: "post",
+            forum: title.textContent,
+            username: username,
+            message: msgToSend
+        };
+        webSocket.send(JSON.stringify(postMsg));
+        msgField.value = "";
+    }
+
+    function displayExistingMessages(messages) {
+        divMsg.innerHTML = " "; // Clear Div to prevent duplicates
+        // Display existing messages in the client's view
+        messages.forEach(function (message) {
+            divMsg.innerHTML += "<div style='color:grey'>" +message+ "</div>";
+        });
+    }
+</script>
+</html>
